@@ -1,0 +1,10 @@
+target/
+out/
+project/target/
+.bsp/
+.idea/
+*.class
+spark-warehouse/
+metastore_db/
+derby.log
+__pycache__/

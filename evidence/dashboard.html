@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data quality monitor</title>
+<style>
+:root{--bg:#f7f7f5;--fg:#1d1d1b;--muted:#6b6b66;--line:#ddddd8;--ok:#2e7d4f;--warn:#b7791f;--fail:#c0392b;--card:#fff}
+@media (prefers-color-scheme: dark){:root{--bg:#161615;--fg:#ececea;--muted:#a3a39e;--line:#33332f;--card:#1f1f1d}}
+body{margin:0;font:14px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+main{max-width:1100px;margin:0 auto;padding:24px 16px}
+h1{font-size:20px;margin:0 0 4px} h2{font-size:15px;margin:28px 0 8px}
+.muted{color:var(--muted)} .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;overflow-x:auto}
+table{border-collapse:collapse;width:100%} th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted)} .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap} .ids{font-family:ui-monospace,monospace;font-size:12px}
+.b{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff}
+.b.OK{background:var(--ok)} .b.WARN{background:var(--warn)} .b.FAIL{background:var(--fail)}
+rect.OK{fill:var(--ok)} rect.WARN{fill:var(--warn)} rect.FAIL{fill:var(--fail)} svg text{fill:var(--muted);font-size:11px}
+.big{font-size:28px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+</style></head><body><main>
+<h1>Data quality monitor</h1>
+<p class="muted">Synthetic data. Generated 2026-11-18T23:20:00.649257608Z by spark-data-quality-monitor.</p>
+<div class="grid">
+<div class="card"><div class="muted">Dataset</div><div class="big">flights</div></div>
+<div class="card"><div class="muted">Latest run</div><div class="big">2027-02-02</div></div>
+<div class="card"><div class="muted">Status</div><div class="big"><span class="b FAIL">FAIL</span></div></div>
+<div class="card"><div class="muted">Rows</div><div class="big">140000</div></div>
+<div class="card"><div class="muted">Checks needing attention</div><div class="big">6 / 11</div></div>
+</div>
+<h2>Checks in the latest run</h2>
+<div class="card"><table><thead><tr><th>Check</th><th>Status</th><th class="n">Failed rows</th><th class="n">Ratio</th><th>Rule</th><th>Sample flight_id</th></tr></thead>
+<tbody>
+<tr><td>row_count_change</td><td><span class="b FAIL">FAIL</span></td><td class="n">60000</td><td class="n">30.00 %</td><td>rows 200000 -&gt; 140000 (30.0 % change)</td><td class="ids"></td></tr>
+<tr><td>freshness_flight_date</td><td><span class="b OK">OK</span></td><td class="n">0</td><td class="n">0.00 %</td><td>newest flight_date 2027-02-02, expected 2027-02-02</td><td class="ids"></td></tr>
+<tr><td>unique_flight_id</td><td><span class="b FAIL">FAIL</span></td><td class="n">1400</td><td class="n">1.00 %</td><td>flight_id must be unique</td><td class="ids">XX0084406-2027-02-02 XX0084406-2027-02-02 XX0012606-2027-02-02 XX0012606-2027-02-02 XX0139606-2027-02-02</td></tr>
+<tr><td>not_null_flight_id</td><td><span class="b OK">OK</span></td><td class="n">0</td><td class="n">0.00 %</td><td>flight_id must be filled</td><td class="ids"></td></tr>
+<tr><td>not_null_actual_dep</td><td><span class="b FAIL">FAIL</span></td><td class="n">2800</td><td class="n">2.00 %</td><td>actual_dep must be filled</td><td class="ids">XX0052503-2027-02-02 XX0052553-2027-02-02 XX0052603-2027-02-02 XX0052653-2027-02-02 XX0052703-2027-02-02</td></tr>
+<tr><td>not_null_actual_arr</td><td><span class="b OK">OK</span></td><td class="n">0</td><td class="n">0.00 %</td><td>actual_arr must be filled</td><td class="ids"></td></tr>
+<tr><td>allowed_origin</td><td><span class="b FAIL">FAIL</span></td><td class="n">350</td><td class="n">0.25 %</td><td>origin must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE</td><td class="ids">XX0052813-2027-02-02 XX0053213-2027-02-02 XX0053613-2027-02-02 XX0054013-2027-02-02 XX0054413-2027-02-02</td></tr>
+<tr><td>allowed_destination</td><td><span class="b OK">OK</span></td><td class="n">0</td><td class="n">0.00 %</td><td>destination must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE</td><td class="ids"></td></tr>
+<tr><td>passengers_within_capacity</td><td><span class="b WARN">WARN</span></td><td class="n">467</td><td class="n">0.33 %</td><td>0 &lt;= passengers &lt;= capacity</td><td class="ids">XX0052511-2027-02-02 XX0052811-2027-02-02 XX0053111-2027-02-02 XX0053411-2027-02-02 XX0053711-2027-02-02</td></tr>
+<tr><td>arrival_after_departure</td><td><span class="b FAIL">FAIL</span></td><td class="n">280</td><td class="n">0.20 %</td><td>actual_arr must be later than actual_dep</td><td class="ids">XX0052517-2027-02-02 XX0053017-2027-02-02 XX0053517-2027-02-02 XX0054017-2027-02-02 XX0054517-2027-02-02</td></tr>
+<tr><td>delay_in_range</td><td><span class="b OK">OK</span></td><td class="n">0</td><td class="n">0.00 %</td><td>-60 &lt;= delay_min &lt;= 1440</td><td class="ids"></td></tr>
+</tbody></table></div>
+<h2>Rows per run</h2>
+<div class="card"><svg width="300" height="152" role="img" aria-label="Rows per run"><rect class="OK" x="10" y="10" width="34" height="120"><title>flights-2027-02-01-1795043987104: 200000 rows, OK</title></rect><text x="27" y="146" text-anchor="middle">02-01</text><rect class="FAIL" x="52" y="46" width="34" height="84"><title>flights-2027-02-02-1795044000641: 140000 rows, FAIL</title></rect><text x="69" y="146" text-anchor="middle">02-02</text></svg></div>
+<h2>Run history</h2>
+<div class="card"><table><thead><tr><th>Run</th><th>Dataset</th><th>Date</th><th class="n">Rows</th><th>Status</th><th class="n">Problems</th><th class="n">Duration</th></tr></thead>
+<tbody>
+<tr><td>flights-2027-02-02-1795044000641</td><td>flights</td><td>2027-02-02</td><td class="n">140000</td><td><span class="b FAIL">FAIL</span></td><td class="n">6</td><td class="n">9002 ms</td></tr>
+<tr><td>flights-2027-02-01-1795043987104</td><td>flights</td><td>2027-02-01</td><td class="n">200000</td><td><span class="b OK">OK</span></td><td class="n">0</td><td class="n">8189 ms</td></tr>
+</tbody></table></div>
+</main></body></html>

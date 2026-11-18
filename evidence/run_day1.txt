@@ -1,0 +1,14 @@
+run flights-2027-02-01-1795043987104: OK, 200000 rows, 0 check(s) need attention
+  OK   row_count_change                    0  no previous run to compare
+  OK   freshness_flight_date               0  newest flight_date 2027-02-01, expected 2027-02-01
+  OK   unique_flight_id                    0  flight_id must be unique
+  OK   not_null_flight_id                  0  flight_id must be filled
+  OK   not_null_actual_dep                 0  actual_dep must be filled
+  OK   not_null_actual_arr                 0  actual_arr must be filled
+  OK   allowed_origin                      0  origin must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE
+  OK   allowed_destination                 0  destination must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE
+  OK   passengers_within_capacity          0  0 <= passengers <= capacity
+  OK   arrival_after_departure             0  actual_arr must be later than actual_dep
+  OK   delay_in_range                      0  -60 <= delay_min <= 1440
+  notification: status OK: no notification
+exit code day 1: 0

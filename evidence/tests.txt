@@ -1,0 +1,18 @@
+PASS  clean data: every check is OK
+PASS  generator is repeatable with the same seed
+PASS  missing actual_dep: 80 rows (2 %) -> FAIL
+PASS  duplicated flight_id: 20 pairs -> 40 rows, FAIL
+PASS  passengers above capacity: 14 rows (0.35 %) -> WARN
+PASS  unknown origin ZZZ: 10 rows -> FAIL
+PASS  arrival before departure: 8 rows -> FAIL
+PASS  samples point at real failing rows
+PASS  row count change thresholds: 5 % OK, 12 % WARN, 30 % FAIL, first run OK
+PASS  freshness fails when the batch is older than the run date
+PASS  run JSON is valid and keeps the overall status
+PASS  JSON escaping handles quotes, backslashes and newlines
+PASS  Teams payload is a valid Adaptive Card message listing only problem checks
+PASS  email has a subject with the status and lists the problems
+PASS  Bigtable row keys sort newest run first
+PASS  Bigtable CSV has family and qualifier header rows plus one row per check
+
+16 passed, 0 failed

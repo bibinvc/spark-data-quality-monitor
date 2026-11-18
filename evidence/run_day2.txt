@@ -1,0 +1,14 @@
+run flights-2027-02-02-1795044000641: FAIL, 140000 rows, 6 check(s) need attention
+  FAIL row_count_change                60000  rows 200000 -> 140000 (30.0 % change)
+  OK   freshness_flight_date               0  newest flight_date 2027-02-02, expected 2027-02-02
+  FAIL unique_flight_id                 1400  flight_id must be unique
+  OK   not_null_flight_id                  0  flight_id must be filled
+  FAIL not_null_actual_dep              2800  actual_dep must be filled
+  OK   not_null_actual_arr                 0  actual_arr must be filled
+  FAIL allowed_origin                    350  origin must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE
+  OK   allowed_destination                 0  destination must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE
+  WARN passengers_within_capacity        467  0 <= passengers <= capacity
+  FAIL arrival_after_departure           280  actual_arr must be later than actual_dep
+  OK   delay_in_range                      0  -60 <= delay_min <= 1440
+  notification: dry run: Teams payload and email written to out/notifications (set TEAMS_WEBHOOK_URL to post)
+exit code day 2: 2

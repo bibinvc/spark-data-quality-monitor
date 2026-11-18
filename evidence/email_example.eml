@@ -1,0 +1,21 @@
+From: dq-monitor@example.invalid
+To: data-team@example.invalid
+Subject: [FAIL] Data quality flights 2027-02-02
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+Dataset: flights
+Run date: 2027-02-02
+Run id: flights-2027-02-02-1795044000641
+Rows: 140000
+Overall status: FAIL
+
+Checks that need attention:
+FAIL  row_count_change: 60000 rows (30.00 %). rows 200000 -> 140000 (30.0 % change)
+FAIL  unique_flight_id: 1400 rows (1.00 %). flight_id must be unique
+FAIL  not_null_actual_dep: 2800 rows (2.00 %). actual_dep must be filled
+FAIL  allowed_origin: 350 rows (0.25 %). origin must be one of AMS,CDG,LHR,FRA,MAD,BCN,FCO,CPH,OSL,DUB,LIS,VIE
+WARN  passengers_within_capacity: 467 rows (0.33 %). 0 <= passengers <= capacity
+FAIL  arrival_after_departure: 280 rows (0.20 %). actual_arr must be later than actual_dep
+
+Sent by spark-data-quality-monitor.
