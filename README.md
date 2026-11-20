@@ -4,7 +4,7 @@ Scala and Apache Spark job that checks a daily batch of flight operations data b
 used, alerts on Microsoft Teams or by email when something is wrong, keeps a run history for a
 monitoring dashboard, and measures how much Parquet and Spark settings change pipeline speed.
 
-**AI-assisted personal project, November 2026.** All data is synthetic: carrier `XX`, flight
+**Personal project, November 2026.** All data is synthetic: carrier `XX`, flight
 numbers and values are made up. It is not connected to any airline system.
 
 ![Monitoring dashboard](docs/dashboard.png)

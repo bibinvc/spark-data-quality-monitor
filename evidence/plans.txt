@@ -3,11 +3,11 @@ AdaptiveSparkPlan isFinalPlan=false
 +- HashAggregate(keys=[], functions=[sum(passengers#1737), sum(capacity#1736)], output=[(sum(passengers) / sum(capacity))#1750])
    +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=1601]
       +- HashAggregate(keys=[], functions=[partial_sum(passengers#1737), partial_sum(capacity#1736)], output=[sum#1754L, sum#1755L])
-         +- FileScan parquet [capacity#1736,passengers#1737] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:./out/benchmark/bench-data/parquethome-claude/35077189-9c30-5901-bb26-1e369aeb84bc/s..., PartitionFilters: [], PushedFilters: [], ReadSchema: struct<capacity:int,passengers:int>
+         +- FileScan parquet [capacity#1736,passengers#1737] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:./out/benchmark/bench-data/parquet], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<capacity:int,passengers:int>
 
 
 q3 on Parquet (see PushedFilters)
 *(1) Filter (((isnotnull(origin#1758) AND isnotnull(delay_min#1763)) AND (origin#1758 = AMS)) AND (delay_min#1763 > 60))
 +- *(1) ColumnarToRow
-   +- FileScan parquet [flight_id#1756,flight_date#1757,origin#1758,destination#1759,sched_dep#1760,actual_dep#1761,actual_arr#1762,delay_min#1763,capacity#1764,passengers#1765] Batched: true, DataFilters: [isnotnull(origin#1758), isnotnull(delay_min#1763), (origin#1758 = AMS), (delay_min#1763 > 60)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:./out/benchmark/bench-data/parquethome-claude/35077189-9c30-5901-bb26-1e369aeb84bc/s..., PartitionFilters: [], PushedFilters: [IsNotNull(origin), IsNotNull(delay_min), EqualTo(origin,AMS), GreaterThan(delay_min,60)], ReadSchema: struct<flight_id:string,flight_date:date,origin:string,destination:string,sched_dep:timestamp,act...
+   +- FileScan parquet [flight_id#1756,flight_date#1757,origin#1758,destination#1759,sched_dep#1760,actual_dep#1761,actual_arr#1762,delay_min#1763,capacity#1764,passengers#1765] Batched: true, DataFilters: [isnotnull(origin#1758), isnotnull(delay_min#1763), (origin#1758 = AMS), (delay_min#1763 > 60)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:./out/benchmark/bench-data/parquet], PartitionFilters: [], PushedFilters: [IsNotNull(origin), IsNotNull(delay_min), EqualTo(origin,AMS), GreaterThan(delay_min,60)], ReadSchema: struct<flight_id:string,flight_date:date,origin:string,destination:string,sched_dep:timestamp,act...
 
